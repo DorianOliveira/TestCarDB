@@ -1,5 +1,6 @@
 import { Component } from "react";
 import CarApi from "../service/CarApi";
+import { CarFormComponent } from "./CarForm";
 
 export class CarListComponent extends Component {
 
@@ -15,9 +16,7 @@ export class CarListComponent extends Component {
 
         this.cars = await this.carApi.GetAll();
 
-        this.setState({
-            cars: this.cars
-        });
+        this.setState(state => ({ cars: this.cars }));
     }
 
     getAll() {
@@ -27,8 +26,10 @@ export class CarListComponent extends Component {
     render() {
 
 
-        let cars = null 
-        
+        let cars = null
+        let carEdit = null;
+        let carDelete = null;
+
         if (this.state?.cars)
             cars = this.state.cars;
 
@@ -59,7 +60,9 @@ export class CarListComponent extends Component {
                                     {car.year}
                                 </td>
                                 <td>
-                                    <a href="">Editar</a>
+                                    <a onClick={() =>
+                                        this.setState(state => ({ carEdit: car }))
+                                    }>Editar</a>
                                 </td>
                                 <td>
                                     <a href="">Excluir</a>
@@ -70,6 +73,8 @@ export class CarListComponent extends Component {
 
                     </tbody>
                 </table>
+                {this.state?.carEdit ? <CarFormComponent id={this.state.carEdit.id}></CarFormComponent> : []}
+
             </div>
 
 

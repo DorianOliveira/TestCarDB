@@ -8,6 +8,12 @@ export default class CarApi extends BaseRequest {
         return data;
     }
 
+    async GetById(id) {
+
+        const car = await super.Get(`cars/${id}`);
+        return car;
+    }
+
     loadItem(item) {
         
         return item;
