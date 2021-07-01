@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2Kd4IdGjntdJBgreoc4NS/McnBcPq65L/zXFAG+VUvFr5Z3mF+yIKdwLjB5fXhNYXdTpne5T3MMbbD2q5PlbtA==",
+  "dgSpecHash": "aLI0WU9az8rkb8VDue+2bjwG7VLCkAj0LIFlFa1380lU6OpHiep9bzm8aZm8FcruNtsYw4reptTtdr3MSH/7Nw==",
   "success": true,
-  "projectFilePath": "D:\\Desenvolvimento\\Processor\\CarDB\\CarDB\\CarDB.csproj",
+  "projectFilePath": "D:\\Desenvolvimento\\processor-test\\TestCarDB\\CarDB\\CarDB.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\doria\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\doria\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

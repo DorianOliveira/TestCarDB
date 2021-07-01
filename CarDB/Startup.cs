@@ -28,15 +28,26 @@ namespace CarDB
 
         public IConfiguration Configuration { get; }
 
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "carlist", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CarDB", Version = "v1" });
             });
+
+
 
             services.AddScoped(provider => new MapperConfiguration(options =>
             {
@@ -59,6 +70,12 @@ namespace CarDB
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(builder =>
+             builder.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+          );
 
             app.UseAuthorization();
 

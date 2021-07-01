@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Desenvolvimento\\Processor\\CarDB\\CarDB\\CarDB.csproj": {}
+    "D:\\Desenvolvimento\\processor-test\\TestCarDB\\CarDB\\CarDB.csproj": {}
   },
   "projects": {
-    "D:\\Desenvolvimento\\Processor\\CarDB\\CarDB\\CarDB.csproj": {
+    "D:\\Desenvolvimento\\processor-test\\TestCarDB\\CarDB\\CarDB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Desenvolvimento\\Processor\\CarDB\\CarDB\\CarDB.csproj",
+        "projectUniqueName": "D:\\Desenvolvimento\\processor-test\\TestCarDB\\CarDB\\CarDB.csproj",
         "projectName": "CarDB",
-        "projectPath": "D:\\Desenvolvimento\\Processor\\CarDB\\CarDB\\CarDB.csproj",
+        "projectPath": "D:\\Desenvolvimento\\processor-test\\TestCarDB\\CarDB\\CarDB.csproj",
         "packagesPath": "C:\\Users\\doria\\.nuget\\packages\\",
-        "outputPath": "D:\\Desenvolvimento\\Processor\\CarDB\\CarDB\\obj\\",
+        "outputPath": "D:\\Desenvolvimento\\processor-test\\TestCarDB\\CarDB\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\doria\\AppData\\Roaming\\NuGet\\NuGet.Config",
