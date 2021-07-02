@@ -47,13 +47,16 @@ namespace CarDB.Service.JsonHelper
 
         public void Update(T item)
         {
-            var data = GetAll();
+            _data = GetAll();
 
-            var itemData = data.Find(dataItem => dataItem.Id == item.Id);
+            var itemData = _data.Find(dataItem => dataItem.Id == item.Id);
 
-            data.Remove(itemData);
-            data.Add(item);
-            Save();
+            if (itemData != null)
+            {
+                _data.Remove(itemData);
+                _data.Add(item);
+                Save();
+            }
         }
 
         private void Save()

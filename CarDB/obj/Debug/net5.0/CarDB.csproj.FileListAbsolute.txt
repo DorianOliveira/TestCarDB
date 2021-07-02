@@ -62,3 +62,4 @@ D:\Desenvolvimento\processor-test\TestCarDB\CarDB\obj\Debug\net5.0\CarDB.dll
 D:\Desenvolvimento\processor-test\TestCarDB\CarDB\obj\Debug\net5.0\ref\CarDB.dll
 D:\Desenvolvimento\processor-test\TestCarDB\CarDB\obj\Debug\net5.0\CarDB.pdb
 D:\Desenvolvimento\processor-test\TestCarDB\CarDB\obj\Debug\net5.0\CarDB.genruntimeconfig.cache
+D:\Desenvolvimento\processor-test\TestCarDB\CarDB\bin\Debug\net5.0\Data\data-bkp.json

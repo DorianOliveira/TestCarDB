@@ -1,0 +1,44 @@
+[
+  {
+    "Year": 2010,
+    "Brand": "Fiat",
+    "Model": "Palio",
+    "Id": 1
+  },
+  {
+    "Year": 2015,
+    "Brand": "Renaut",
+    "Model": "Clio",
+    "Id": 2
+  },
+  {
+    "Year": 1999,
+    "Brand": "Fiat",
+    "Model": "Uno",
+    "Id": 3
+  },
+  {
+    "Year": 1990,
+    "Brand": "Chevrolet",
+    "Model": "Corsa",
+    "Id": 4
+  },
+  {
+    "Year": 2012,
+    "Brand": "Ford",
+    "Model": "Ka",
+    "Id": 5
+  },
+  {
+    "Year": 9999,
+    "Brand": "Batata",
+    "Model": "Frita",
+    "Id": 6
+  },
+  {
+    "Year": 9999,
+    "Brand": "Batata",
+    "Model": "Frita",
+    "Id": 7
+  }
+]

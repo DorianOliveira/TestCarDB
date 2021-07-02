@@ -2,6 +2,7 @@
 using CarDB.Service.Repository;
 using CarDB.Model;
 using AutoMapper;
+using System;
 
 namespace CarDB.Controllers
 {
@@ -58,6 +59,12 @@ namespace CarDB.Controllers
         {
             try
             {
+                var now = DateTime.Now;
+
+                if (car.Year < now.Year - 20)
+                    return BadRequest("A idade do veículo não pode ser maior do que 20 anos");
+
+
                 _carRepository.Insert(_mapper.Map<CarModel>(car));
 
                 return new JsonResult(new

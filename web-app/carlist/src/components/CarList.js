@@ -1,10 +1,10 @@
 import { Component } from "react";
 import CarApi from "../service/CarApi";
 import { CarFormComponent } from "./CarForm";
+import { CarRemoveComponent } from "./CarRemove";
 
 export class CarListComponent extends Component {
 
-    cars;
     carApi;
 
     constructor() {
@@ -13,30 +13,41 @@ export class CarListComponent extends Component {
     }
 
     async componentDidMount() {
-
-        this.cars = await this.carApi.GetAll();
-
-        this.setState(state => ({ cars: this.cars }));
+        this.getAll();
     }
 
-    getAll() {
+    async getAll() {
+        let cars = await this.carApi.GetAll();
 
+        if (cars)
+            cars.sort((item1, item2) => item1.id.toString().localeCompare(item2.id.toString()));
+
+        this.setState(state => ({ cars }));
+    }
+
+    async onUpdateCar() {
+        await this.getAll();
     }
 
     render() {
 
+        let cars = [];
 
-        let cars = null
-        let carEdit = null;
         let carDelete = null;
 
-        if (this.state?.cars)
+        if (this.state && this.state.cars)
             cars = this.state.cars;
+
+
+        if (!cars || cars.length === 0) {
+            return <h3>Nenhum carro encontrado!</h3>;
+        }
+
 
         return (
             <div>
                 <h2>Carros encontrados:</h2>
-                <table>
+                <table class="table">
                     <thead>
                         <th>Id</th>
                         <th>Marca</th>
@@ -60,12 +71,14 @@ export class CarListComponent extends Component {
                                     {car.year}
                                 </td>
                                 <td>
-                                    <a onClick={() =>
-                                        this.setState(state => ({ carEdit: car }))
+                                    <a class="action-link" onClick={() =>
+                                        this.setState(state => ({ carEdit: car, carDelete: null, newCar: false }))
                                     }>Editar</a>
                                 </td>
                                 <td>
-                                    <a href="">Excluir</a>
+                                    <a class="action-link" onClick={() =>
+                                        this.setState(state => ({ carDelete: car, carEdit: null, newCar: false }))
+                                    }>Excluir</a>
                                 </td>
                             </tr>
 
@@ -73,13 +86,16 @@ export class CarListComponent extends Component {
 
                     </tbody>
                 </table>
-                {this.state?.carEdit ? <CarFormComponent id={this.state.carEdit.id}></CarFormComponent> : []}
+                <button class="button" onClick={() =>
+                    this.setState(state => ({ carDelete: null, carEdit: null, newCar: true }))
+                }>Novo carro</button>
+
+                {this.state?.newCar ?<CarFormComponent onUpdate={__ => this.onUpdateCar()} new={true}></CarFormComponent> : []}
+                {this.state?.carEdit ?<CarFormComponent onUpdate={__ => this.onUpdateCar()} car={this.state.carEdit}></CarFormComponent> : []}
+                {this.state?.carDelete ? <CarRemoveComponent onUpdate={__ => this.onUpdateCar()} car={this.state.carDelete}></CarRemoveComponent> : []}
 
             </div>
 
-
         );
     }
-
-
 }

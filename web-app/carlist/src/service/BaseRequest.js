@@ -5,6 +5,7 @@ export class BaseRequest {
     constructor() {
         this.carListFetch = new CarListFetch();
         this.url = Config.ApiUrl;
+        this.body = null;
     }
 
     async Get(endpoint) {
@@ -15,9 +16,12 @@ export class BaseRequest {
         return await this.doRequest(endpoint, RequestType.Single, RequestMethod.POST);
     }
 
+    async Delete(endpoint) {
+        return await this.doRequest(endpoint, RequestType.Single, RequestMethod.DELETE);
+    }
+
     async GetList(endpoint) {
 
-        
         return await this.doRequest(endpoint, RequestType.List, RequestMethod.GET);
     }
 
@@ -35,12 +39,19 @@ export class BaseRequest {
 
         const apiUrl = `${this.url}/${endpoint}`;
 
+        
+
         if (requestMethod === RequestMethod.GET) {
             response = await this.carListFetch.get(apiUrl);
         }
         else if (requestMethod === RequestMethod.POST) {
-            response = await this.carListFetch.post(apiUrl);
+            response = await this.carListFetch.post(apiUrl, this.body);
+        } else if (requestMethod === RequestMethod.DELETE) {
+
+            console.log('deleee');
+            response = await this.carListFetch.delete(apiUrl);
         }
+            
 
         if (response.ok) {
 
@@ -67,20 +78,30 @@ export class BaseRequest {
                     content = json;
                 }
             }
-            return {
-                data: content,
-                httpResponse: response
+
+            if (content) {
+                return {
+                    data: content,
+                    httpResponse: response
+                }
             }
+
+            return null;
         }
         else {
-            console.log(`[BaseRequest] > [doRequest] Something goes wrong! Endpoint: ${endpoint}. Response: ${response}`);
+            console.error(`[BaseRequest] > [doRequest] Something goes wrong! Endpoint: ${endpoint}. Response: ${response}`);
+            throw await response.text();
         }
 
         return null;
     }
 
+    handleError() {
+
+    }
+
     loadItem(item) {
-        
+
         return item;
     }
 
