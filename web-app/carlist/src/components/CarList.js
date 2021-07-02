@@ -7,8 +7,8 @@ export class CarListComponent extends Component {
 
     carApi;
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.carApi = new CarApi();
     }
 
@@ -44,55 +44,64 @@ export class CarListComponent extends Component {
         }
 
 
+        console.log(this.state?.carDelete);
+
         return (
             <div>
                 <h2>Carros encontrados:</h2>
-                <table class="table">
-                    <thead>
-                        <th>Id</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
-                        <th>Ano</th>
-                        <th colspan="2">Ações</th>
-                    </thead>
-                    <tbody>
-                        {cars ? cars.map(car => {
-                            return <tr key={car.id}>
-                                <td>
-                                    {car.id}
-                                </td>
-                                <td>
-                                    {car.brand}
-                                </td>
-                                <td>
-                                    {car.model}
-                                </td>
-                                <td>
-                                    {car.year}
-                                </td>
-                                <td>
-                                    <a class="action-link" onClick={() =>
-                                        this.setState(state => ({ carEdit: car, carDelete: null, newCar: false }))
-                                    }>Editar</a>
-                                </td>
-                                <td>
-                                    <a class="action-link" onClick={() =>
-                                        this.setState(state => ({ carDelete: car, carEdit: null, newCar: false }))
-                                    }>Excluir</a>
-                                </td>
-                            </tr>
+                <div class="container">
 
-                        }) : []}
+                    <div class="main-data">
+                        <table class="table">
+                            <thead>
+                                <th>Id</th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                                <th>Ano</th>
+                                <th colspan="2">Ações</th>
+                            </thead>
+                            <tbody>
+                                {cars ? cars.map(car => {
+                                    return <tr key={car.id}>
+                                        <td>
+                                            {car.id}
+                                        </td>
+                                        <td>
+                                            {car.brand}
+                                        </td>
+                                        <td>
+                                            {car.model}
+                                        </td>
+                                        <td>
+                                            {car.year}
+                                        </td>
+                                        <td>
+                                            <a class="action-link" onClick={() =>
+                                                this.setState(state => ({ carEdit: car, carDelete: null, newCar: false }))
+                                            }>Editar</a>
+                                        </td>
+                                        <td>
+                                            <a class="action-link" onClick={() =>
+                                                this.setState(state => ({ carDelete: car, carEdit: null, newCar: false }))
+                                            }>Excluir</a>
+                                        </td>
+                                    </tr>
 
-                    </tbody>
-                </table>
-                <button class="button" onClick={() =>
-                    this.setState(state => ({ carDelete: null, carEdit: null, newCar: true }))
-                }>Novo carro</button>
+                                }) : []}
 
-                {this.state?.newCar ?<CarFormComponent onUpdate={__ => this.onUpdateCar()} new={true}></CarFormComponent> : []}
-                {this.state?.carEdit ?<CarFormComponent onUpdate={__ => this.onUpdateCar()} car={this.state.carEdit}></CarFormComponent> : []}
-                {this.state?.carDelete ? <CarRemoveComponent onUpdate={__ => this.onUpdateCar()} car={this.state.carDelete}></CarRemoveComponent> : []}
+                            </tbody>
+                        </table>
+                        <button class="button" onClick={() =>
+                            this.setState(state => ({ carDelete: null, carEdit: null, newCar: true }))
+                        }>Novo carro</button>
+                    </div>
+
+                    <div class="action-data">
+                        {this.state?.newCar ? <CarFormComponent onUpdate={__ => this.onUpdateCar()} new={true}></CarFormComponent> : []}
+                        {this.state?.carEdit ? <CarFormComponent onUpdate={__ => this.onUpdateCar()} car={this.state.carEdit}></CarFormComponent> : []}
+                        {this.state?.carDelete ? <CarRemoveComponent onUpdate={__ => this.onUpdateCar()} car={this.state.carDelete}></CarRemoveComponent> : []}
+                    </div>
+                </div>
 
             </div>
 

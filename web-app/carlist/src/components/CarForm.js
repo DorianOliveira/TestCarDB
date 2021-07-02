@@ -4,19 +4,23 @@ import CarApi from '../service/CarApi';
 
 export class CarFormComponent extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.carApi = new CarApi();
+
+
 
         this.state = {
             car: null,
             cancel: false,
             errors: {}
         };
+
+        this.onChangeBrand = this.onChangeBrand.bind(this);
+        this.onChangeModel = this.onChangeModel.bind(this);
+        this.onChangeYear = this.onChangeYear.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
-
-
-    
 
     async componentDidUpdate(props) {
 
@@ -64,8 +68,8 @@ export class CarFormComponent extends Component {
         });
     }
 
-    async onSubmit() {
-
+    async onSubmit(event) {
+        event.preventDefault();
 
         try {
 
@@ -98,7 +102,8 @@ export class CarFormComponent extends Component {
             }
 
             this.setState(state => ({
-                loading: true
+                loading: true,
+                errors: {}
             }));
 
             if (this.props.new)
@@ -108,8 +113,7 @@ export class CarFormComponent extends Component {
 
             this.setState(state => ({
                 ready: true,
-                loading: false,
-                car: {}
+                loading: false
             }));
 
             if (this.props.onUpdate)
@@ -121,49 +125,50 @@ export class CarFormComponent extends Component {
                 error: true,
                 loading: false
             }));
-        }
+        }      
     }
 
     render() {
 
-        if (!this.props.car && !this.props.new || this.state.cancel)
-            return null;
+        let car = this.state.car;
+
+        if (!car)
+            car = {};
 
         return (
-            <div class="modal form">
+            <form onSubmit={this.onSubmit} class="modal form">
 
                 <h2>Dados do carro</h2>
                 <hr></hr>
                 <div class="fields">
 
                     <div class="form-field">
-                        <label>Marca:</label>
-                        <input type="text" onChange={__ => this.onChangeBrand(__)} value={this.state.car?.brand}></input>
+                        <label>Marca: {this.state.car?.brand}</label> 
+                        <input type="text" onChange={this.onChangeBrand} value={car.brand}></input>
                         <span class="error">{this.state.errors.brandError}</span>
                     </div>
 
                     <div class="form-field">
                         <label>Modelo:</label>
-                        <input type="text" onChange={__ => this.onChangeModel(__)} value={this.state.car?.model}></input>
+                        <input type="text" onChange={this.onChangeModel} value={car.model}></input>
                         <span class="error">{this.state.errors.modelError}</span>
                     </div>
 
                     <div class="form-field">
                         <label>Ano:</label>
-                        <input type="text" onChange={__ => this.onChangeYear(__)} value={this.state.car?.year}></input>
+                        <input type="text" onChange={this.onChangeYear} value={car.year}></input>
                         <span class="error">{this.state.errors.yearError}</span>
 
                     </div>
                 </div>
 
 
-                <button class="button" onClick={__ => this.onSubmit()}>Salvar</button>
-                &nbsp;<button class="button cancel" onClick={__ => this.setState( state => ({cancel: true}))}>Cancelar</button>
+                <button class="button" type="submit">Salvar</button>
 
                 {this.state?.loading ? <h3>Aguarde...</h3> : []}
                 {this.state?.ready ? <h3 class="success">Dados atualizados com sucesso</h3> : []}
                 {this.state?.error ? <h3 class="error">Ocorreu um erro ao processar os dados</h3> : []}
-            </div>
+            </form>
 
         );
     }

@@ -47,8 +47,6 @@ export class BaseRequest {
         else if (requestMethod === RequestMethod.POST) {
             response = await this.carListFetch.post(apiUrl, this.body);
         } else if (requestMethod === RequestMethod.DELETE) {
-
-            console.log('deleee');
             response = await this.carListFetch.delete(apiUrl);
         }
             

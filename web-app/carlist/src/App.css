@@ -24,6 +24,14 @@
   color: white;
 }
 
+.container {
+    display: flex;
+}
+
+.main-data {
+    flex: 3;
+}
+
 .success {
     color: #0a0;
 }
@@ -32,8 +40,12 @@
     color: #f00;
 }
 
+.action-data {
+    flex: 2;
+}
+
 .modal {
-    width: 60%;
+    /* width: 60%;
     border-radius: 16px;
     border: 1px solid #ccc;
     position: absolute;
@@ -41,7 +53,7 @@
     left: 50%;
     transform: translateX(-50%);
     background: #fff;
-    padding: 16px;
+    padding: 16px; */
 }
 
 .action-link {

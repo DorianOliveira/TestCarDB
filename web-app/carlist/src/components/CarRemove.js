@@ -4,8 +4,8 @@ import CarApi from '../service/CarApi';
 
 export class CarRemoveComponent extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.carApi = new CarApi();
 
         this.state = {
@@ -17,18 +17,31 @@ export class CarRemoveComponent extends Component {
 
     async componentDidUpdate(props) {
 
-        if (props.id !== this.props.id) {
-            const id = this.props.id;
-
-            const car = await this.carApi.GetById(id);
-
-            if (car) {
-                this.setState({
-                    car: car
-                });
-            }
+        if (props.car?.id !== this.props.car?.id) {
+            this.updateCar();
         }
+    }
 
+    async componentDidMount() {
+        this.updateCar();
+    }
+
+    componentWillUnmount() {
+    }
+
+    async updateCar() {
+        const id = this.props.car.id;
+
+        const car = await this.carApi.GetById(id);
+
+        if (car) {
+            this.setState(state => ({
+                car: car,
+                ready: false,
+                loading: false,
+                error: false
+            }));
+        }
     }
 
     async confirm() {
@@ -36,8 +49,6 @@ export class CarRemoveComponent extends Component {
         this.setState(state => ({
             loading: true
         }))
-
-        console.log(this.props);
 
         try {
             await this.carApi.Remove(this.props.car.id);
@@ -49,10 +60,8 @@ export class CarRemoveComponent extends Component {
             if (this.props.onUpdate)
                 this.props.onUpdate();
 
-
         } catch {
 
-            console.log('error');
             this.setState(state => ({
                 error: true,
             }))
@@ -75,7 +84,6 @@ export class CarRemoveComponent extends Component {
             <p><strong>Brand:</strong> {car?.year}</p>
 
             <button class="button" onClick={__ => this.confirm()}>Confirmar</button>
-            <button class="button cancel">Cancelar</button>
         </>);
 
         return (
